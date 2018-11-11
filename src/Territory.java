@@ -1,3 +1,5 @@
+import java.util.HashSet;
+import java.util.Set;
 
 public class Territory {
 
@@ -9,14 +11,21 @@ public class Territory {
 	// optional
 	private Country owner;
 	private Country originalOwner;
+	private Set<Territory> borderingTerritories;
+	
+	private Territory() {
+		this.borderingTerritories = new HashSet<>();
+	}
 
 	public Territory(String name, int value) {
+		this();
 		this.name = name;
 		this.value = value;
 		this.type = Type.Normal;
 	}
 
 	public Territory(String name, int value, boolean capital, String cityName) {
+		this();
 		this.name = name;
 		this.value = value;
 		this.type = capital ? Type.Capital : Type.VictoryCity;
@@ -68,6 +77,19 @@ public class Territory {
 		} else {
 			this.originalOwner = this.owner = owner;
 		}
+	}
+	
+	public Set<Territory> getBorderingTerritories() {
+		return borderingTerritories;
+	}
+	
+	public void addBorderingTerritory(Territory other) {
+		this.borderingTerritories.add(other);
+		other.borderingTerritories.add(this);
+	}
+	
+	public boolean isBordering(Territory other) {
+		return borderingTerritories.contains(other);
 	}
 
 	public String toString() {

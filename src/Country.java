@@ -83,7 +83,7 @@ public class Country {
 	public String getSummary() {
 		String result = getName() + " has " + getVictoryPoints();
 		if (!isOccupied()) {
-			result += ", " + getBalance() + " IPCs in the bank, and an income of " + getIncome() + ".\n";
+			result += ", " + getBalance() + " IPCs in the bank, and an income of " + getIncome() + ".";
 		} else {
 			result += " and is occupied.";
 		}

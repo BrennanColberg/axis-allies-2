@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,10 +14,11 @@ public class Main {
 		List<Country> countries = loadCountries(path);
 		Map<String, Territory> territories = loadTerritories(path);
 		loadTerritoryOwnership(territories, countries);
+		loadBorders(path, territories);
 
 		for (Country country : countries)
-			System.out.printf("%s has %d victory points, %d IPCs in the bank, and an income of %d.\n",
-					country.getName(), country.getVictoryPoints(), country.getBalance(), country.getIncome());
+			System.out.println(country.getSummary());
+		
 	}
 
 	@SuppressWarnings("resource")
@@ -82,6 +84,18 @@ public class Main {
 		for (Territory territory : territories.values())
 			if (territory.getOwner() == null)
 				throw new IllegalStateException(territory.getName() + " is unowned!");
+	}
+
+	@SuppressWarnings("resource")
+	private static void loadBorders(String path, Map<String, Territory> territories) throws FileNotFoundException {
+		Scanner file = new Scanner(new File(path + "borders.txt"));
+		while (file.hasNextLine()) {
+			String[] names = file.nextLine().split("\\|");
+			names[0] = names[0].trim();
+			names[1] = names[1].trim();
+			if (territories.containsKey(names[0]) && territories.containsKey(names[1]))
+				territories.get(names[0]).addBorderingTerritory(territories.get(names[1]));
+		}
 	}
 
 }
