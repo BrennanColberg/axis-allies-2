@@ -18,6 +18,7 @@ public class Main {
 		for (Country country : countries) {
 			System.out.println(country.getSummary());
 			System.out.println(country.getConquerableTerritories());
+			System.out.println();
 		}
 
 	}

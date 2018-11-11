@@ -7,8 +7,8 @@
 3 | 6
 5 | 6
 6 | 7
-7 | 8
 7 | 12
+7 | 8
 8 | 9
 9 | 10
 9 | 11
@@ -220,19 +220,13 @@ Eastern Europe | Germany
 Eastern Europe | Karelia S.S.R.
 Eastern Europe | Ukraine S.S.R.
 Eastern United States | 10
+Eastern United States | Western United States
 Eire | 2
 Eire | 8
 Eire | United Kingdom
 Evenki National Okrug | Novosibirsk
 Evenki National Okrug | Russia
 Evenki National Okrug | Yakut S.S.R.
-Western Europe | 5
-Western Europe | 6
-Western Europe | 7
-Western Europe | Germany
-Western Europe | Southern Europe
-Western Europe | Spain
-Western Europe | Switzerland
 French Equatorial Africa | 23
 French Equatorial Africa | French West Africa
 French Equatorial Africa | Sahara Desert
@@ -258,8 +252,6 @@ India | Nepal
 India | Persia
 Italian East Africa | 34
 Italian East Africa | Rhodesia
-Southern Europe | 14
-Southern Europe | Switzerland
 Japan | 60
 Japan | 61
 Karelia S.S.R. | 4
@@ -316,6 +308,8 @@ Sahara Desert | 17
 Saudi Arabia | 34
 Saudi Arabia | Trans-Jordan
 Solomon Islands | 45
+Southern Europe | 14
+Southern Europe | Switzerland
 Soviet Far East | 62
 Soviet Far East | Yakut S.S.R.
 Spain | 12
@@ -341,5 +335,12 @@ Wake Island | 51
 West Indies | 19
 Western Canada | 64
 Western Canada | Western United States
+Western Europe | 5
+Western Europe | 6
+Western Europe | 7
+Western Europe | Germany
+Western Europe | Southern Europe
+Western Europe | Spain
+Western Europe | Switzerland
 Western United States | 54
 Western United States | 55
