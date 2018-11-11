@@ -49,7 +49,7 @@ public class Country {
 		if (territories.contains(territory))
 			throw new IllegalStateException(this + " already contains " + territory);
 		territories.add(territory);
-		territory.setOwner(this);
+		territory.setCountry(this);
 	}
 
 	public void removeTerritory(Territory territory) {
@@ -133,6 +133,13 @@ public class Country {
 enum Alliance {
 
 	Allies(), Axis();
+	
+	public Alliance other() {
+		for (Alliance alliance : Alliance.values())
+			if (alliance != this)
+				return alliance;
+		return null;
+	}
 
 	static Alliance fromString(String str) {
 		str = str.toLowerCase();

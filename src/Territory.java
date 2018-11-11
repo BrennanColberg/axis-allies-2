@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -83,6 +84,10 @@ public class Territory {
 	public Country getOriginalCountry() {
 		return originalCountry;
 	}
+	
+	public Alliance getAlliance() {
+		return country.getAlliance();
+	}
 
 	public boolean isCaptured() {
 		if (originalCountry == null)
@@ -90,7 +95,7 @@ public class Territory {
 		return country != originalCountry;
 	}
 
-	public void setOwner(Country owner) {
+	public void setCountry(Country owner) {
 		if (this.country != null) {
 			this.country.removeTerritory(this);
 			this.country = owner;
@@ -126,6 +131,11 @@ public class Territory {
 
 	public void addUnit(Unit unit) {
 		units.add(unit);
+	}
+	
+	public void addUnits(Collection<Unit> units) {
+		for (Unit unit : units)
+			this.units.add(unit);
 	}
 
 	public void removeUnit(Unit unit) {

@@ -1,67 +1,42 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
+@SuppressWarnings("resource")
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		String path = "1942/";
-		// load in territories
+		// get folder
+		Scanner console = new Scanner(System.in);
+		System.out.print("What version are you playing? ");
+		String path = console.nextLine() + "/";
+		// load territories
 		Map<String, Territory> territories = loadTerritories(path);
 		loadBorders(path, territories);
-		// load in countries
+		// load countries
 		List<Country> countries = loadCountries(path);
-		Map<Alliance, List<Country>> alliances = loadAlliances(countries);
+		//Map<Alliance, List<Country>> alliances = loadAlliances(countries);
 		loadTerritoryOwnership(territories, countries);
-		// load in units
+		// load units
 		Map<String, Unit> units = loadUnits(path);
 		loadStartingUnits(path, units, territories);
 
-		// country analysis
-		for (Country country : countries) {
-			Map<String, Integer> unitCount = new HashMap<>();
-			int value = 0;
-			for (String name : units.keySet())
-				unitCount.put(name, 0);
-			for (Territory territory : country.getTerritories())
-				for (Unit unit : territory.getUnits()) {
-					unitCount.put(unit.getName(), unitCount.get(unit.getName()) + 1);
-					value += unit.getCost();
-				}
-			for (String name : unitCount.keySet())
-				if (unitCount.get(name) > 0)
-					System.out.println(country.getName() + " has " + unitCount.get(name) + " of " + name);
-			System.out.println(country.getName() + " has " + value + " IPCs worth of units.");
-			System.out.printf("%s starts with %.1f turns' worth of units.\n", country.getName(),
-					(double) value / country.getIncome());
-			System.out.println();
+		Territory germany = territories.get("Germany");
+		Set<Unit> attacking = new HashSet<>();
+		for (int i = 0; i < 10; i++) {
+			attacking.add(new Unit(units.get("Infantry"), countries.get(4)));
 		}
-
-		// soft underbelly quotient
-		Map<Territory, Double> hardness = new HashMap<>();
-		for (Territory territory : territories.values())
-			if (territory.getValue() != 0)
-				for (Territory border : territory.getBorderingTerritories())
-					if (territory.getCountry() != null && border.getCountry() != null
-							&& !territory.getCountry().alliedTo(border.getCountry())) {
-						int value = territory.getValue();
-						int unitValue = territory.getValueOfUnits();
-						double strength = territory.getDefenseStrength();
-						hardness.put(territory, (double) strength);
-					}
-		List<Entry<Territory, Double>> order = new LinkedList<>(hardness.entrySet());
-		order.sort(Entry.comparingByValue());
-		for (Entry<Territory, Double> entry : order)
-			System.out.printf("%.0f | %s\n", entry.getValue(), entry.getKey());
-
+		germany.addUnits(attacking);
+		Battlefield.conductCombat(germany, countries.get(4));
+		
 	}
 
-	@SuppressWarnings("resource")
 	private static Map<String, Territory> loadTerritories(String path) throws FileNotFoundException {
 		Scanner file = new Scanner(new File(path + "territories.txt"));
 		Map<String, Territory> territories = new HashMap<>();
@@ -99,7 +74,6 @@ public class Main {
 		return territories;
 	}
 
-	@SuppressWarnings("resource")
 	private static List<Country> loadCountries(String path) throws FileNotFoundException {
 		Scanner file = new Scanner(new File(path + "countries.txt"));
 		List<Country> countries = new LinkedList<>();
@@ -122,7 +96,6 @@ public class Main {
 		return alliances;
 	}
 
-	@SuppressWarnings("resource")
 	private static Map<String, Unit> loadUnits(String path) throws FileNotFoundException {
 		Scanner file = new Scanner(new File(path + "units.txt"));
 		Map<String, Unit> units = new HashMap<>();
@@ -141,7 +114,6 @@ public class Main {
 		return units;
 	}
 
-	@SuppressWarnings("resource")
 	private static void loadTerritoryOwnership(Map<String, Territory> territories, List<Country> countries)
 			throws FileNotFoundException {
 		for (Country country : countries) {
@@ -162,7 +134,6 @@ public class Main {
 				throw new IllegalStateException(territory.getName() + " is unowned!");
 	}
 
-	@SuppressWarnings("resource")
 	private static void loadBorders(String path, Map<String, Territory> territories) throws FileNotFoundException {
 		Scanner file = new Scanner(new File(path + "borders.txt"));
 		while (file.hasNextLine()) {
@@ -174,7 +145,6 @@ public class Main {
 		}
 	}
 
-	@SuppressWarnings("resource")
 	private static void loadStartingUnits(String path, Map<String, Unit> units, Map<String, Territory> territories)
 			throws FileNotFoundException {
 		Scanner file = new Scanner(new File(path + "starting-units.txt"));
