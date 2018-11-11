@@ -1,10 +1,6 @@
 
 public class Territory {
 
-	private enum Type {
-		Neutral(), Normal(), VictoryCity(), Capital();
-	}
-
 	private String name;
 	private String cityName;
 	private int value;
@@ -50,15 +46,14 @@ public class Territory {
 		return type == Type.Capital;
 	}
 
+	public Country getOwner() {
+		return owner;
+	}
+
 	public void setOwner(Country owner) {
 		if (this.owner != null)
 			this.owner.removeTerritory(this);
 		this.owner = owner;
-		this.owner.addTerritory(this);
-	}
-
-	public Country getOwner() {
-		return owner;
 	}
 
 	public String toString() {
@@ -69,4 +64,8 @@ public class Territory {
 		}
 	}
 
+}
+
+enum Type {
+	Neutral(), Normal(), VictoryCity(), Capital();
 }

@@ -1,3 +1,4 @@
+import java.util.HashSet;
 import java.util.Set;
 
 public class Country {
@@ -7,6 +8,7 @@ public class Country {
 
 	public Country(String name) {
 		this.name = name;
+		this.territories = new HashSet<>();
 	}
 
 	public String getName() {
@@ -18,14 +20,15 @@ public class Country {
 	}
 
 	public void addTerritory(Territory territory) {
-		if (!territories.contains(territory))
-			throw new IllegalStateException(this + " does not contain " + territory);
+		if (territories.contains(territory))
+			throw new IllegalStateException(this + " already contains " + territory);
 		territories.add(territory);
+		territory.setOwner(this);
 	}
 
 	public void removeTerritory(Territory territory) {
-		if (territories.contains(territory))
-			throw new IllegalStateException(this + " already contains " + territory);
+		if (!territories.contains(territory))
+			throw new IllegalStateException(this + " does not contain " + territory);
 		territories.remove(territory);
 	}
 
