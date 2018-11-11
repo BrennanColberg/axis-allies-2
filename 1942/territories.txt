@@ -1,0 +1,63 @@
+Karelia S.S.R. 2 false Leningrad
+Archangel 2
+Russia 8 true Moscow
+Caucasus 4
+Kazakh S.S.R. 2
+Novosibirsk 2
+Evenki National Okrug 1
+Yakut S.S.R. 1
+Buryatia S.S.R. 1
+Soviet Far East 1
+United Kingdom 8 true London
+Eastern Canada 3
+Western Canada 1
+Gibraltar 0
+French West Africa 1
+French Equatorial Africa 1
+Belgian Congo 1
+Rhodesia 1
+Union of South Africa 2
+French Madagascar 1
+Italian East Africa 1
+Anglo-Egypt Sudan 2
+Trans-Jordan 1
+Persia 1
+India 3 Calcutta
+Australia 2
+New Zealand 1
+Eastern United States 12 true Washington
+Central United States 6
+Western United States 10 false Los Angeles
+Mexico 2
+Panama 1
+West Indies 1
+Brazil 3
+Alaska 2
+Midway 0
+Hawaii 1
+Greenland 0
+China 2
+Sinkiang 2
+Western Europe 6 false Paris
+Southern Europe 6 false Rome
+Germany 10 true Berlin
+Balkans 3
+Ukraine S.S.R. 3
+West Russia 2
+Belorussia 2
+Eastern Europe 3
+Norway 3
+Algeria 1
+Libya 1
+Japan 8 true Tokyo
+Manchuria 3
+Kwangtung 3 false Shanghai
+French Indo-China 3
+East Indies 4
+Borneo 4
+Philippine Islands 3 false Manila
+Okinawa 0
+Caroline Islands 0
+New Guinea 1
+Solomon Islands 0
+Wake Island 0

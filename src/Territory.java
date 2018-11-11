@@ -1,24 +1,24 @@
 
 public class Territory {
 
+	// declared attributes
 	private String name;
-	private String cityName;
 	private int value;
 	private Type type;
+	private String cityName;
+	// optional
 	private Country owner;
 
 	public Territory(String name, int value) {
-		this(name, value, Type.Normal);
-	}
-
-	public Territory(String name, int value, Type type) {
-		this(name, value, type, null);
-	}
-
-	public Territory(String name, int value, Type type, String cityName) {
 		this.name = name;
 		this.value = value;
-		this.type = type;
+		this.type = Type.Normal;
+	}
+
+	public Territory(String name, int value, boolean capital, String cityName) {
+		this.name = name;
+		this.value = value;
+		this.type = capital ? Type.Capital : Type.VictoryCity;
 		this.cityName = cityName;
 	}
 
