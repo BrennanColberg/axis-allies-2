@@ -84,7 +84,7 @@ public class Territory {
 	public Country getOriginalCountry() {
 		return originalCountry;
 	}
-	
+
 	public Alliance getAlliance() {
 		return country.getAlliance();
 	}
@@ -132,7 +132,7 @@ public class Territory {
 	public void addUnit(Unit unit) {
 		units.add(unit);
 	}
-	
+
 	public void addUnits(Collection<Unit> units) {
 		for (Unit unit : units)
 			this.units.add(unit);
