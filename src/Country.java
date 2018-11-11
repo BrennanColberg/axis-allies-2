@@ -56,11 +56,11 @@ public class Country {
 			return 0;
 		}
 	}
-	
+
 	public void collectIncome() {
 		balance += getIncome();
 	}
-	
+
 	public int getVictoryPoints() {
 		int points = 0;
 		for (Territory territory : territories)
@@ -68,12 +68,12 @@ public class Country {
 				points++;
 		return points;
 	}
-	
+
 	public boolean isOccupied() {
 		for (Territory territory : territories)
 			if (territory.isCapital() && territory.getOriginalOwner() == this)
 				return territory.isCaptured();
-		throw new IllegalStateException(this + " does not have a capital!");
+		return false;
 	}
 
 	public String toString() {
@@ -82,13 +82,11 @@ public class Country {
 
 	public void save(PrintStream stream) {
 		List<String> territoryNames = new LinkedList<>();
-		for (Territory territory : territories) {
+		for (Territory territory : territories)
 			territoryNames.add(territory.getName());
-		}
 		territoryNames.sort(null);
-		for (String name : territoryNames) {
+		for (String name : territoryNames)
 			stream.println(name);
-		}
 	}
 
 }

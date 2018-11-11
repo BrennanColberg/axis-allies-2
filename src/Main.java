@@ -13,14 +13,10 @@ public class Main {
 		List<Country> countries = loadCountries(path);
 		Map<String, Territory> territories = loadTerritories(path);
 		loadTerritoryOwnership(territories, countries);
-		
-		for (Country country : countries) {
+
+		for (Country country : countries)
 			System.out.printf("%s has %d victory points, %d IPCs in the bank, and an income of %d.\n",
-					country.getName(),
-					country.getVictoryPoints(),
-					country.getBalance(),
-					country.getIncome());
-		}
+					country.getName(), country.getVictoryPoints(), country.getBalance(), country.getIncome());
 	}
 
 	@SuppressWarnings("resource")

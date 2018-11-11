@@ -50,11 +50,11 @@ public class Territory {
 	public Country getOwner() {
 		return owner;
 	}
-	
+
 	public Country getOriginalOwner() {
 		return originalOwner;
 	}
-	
+
 	public boolean isCaptured() {
 		if (originalOwner == null)
 			throw new IllegalStateException(this + " has never been owned!");
@@ -71,11 +71,7 @@ public class Territory {
 	}
 
 	public String toString() {
-		if (this.isNeutral()) {
-			return name;
-		} else {
-			return name + " (" + value + ")";
-		}
+		return this.isNeutral() ? name : name + " (" + value + ")";
 	}
 
 }
