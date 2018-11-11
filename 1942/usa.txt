@@ -1,13 +1,13 @@
-Eastern United States
-Central United States
-Western United States
-Mexico
-Panama
-West Indies
-Brazil
 Alaska
-Midway
-Hawaii
-Greenland
+Brazil
+Central United States
 China
+Eastern United States
+Greenland
+Hawaii
+Mexico
+Midway
+Panama
 Sinkiang
+West Indies
+Western United States

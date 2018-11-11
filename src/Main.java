@@ -9,10 +9,9 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		Map<String, Territory> territories = loadTerritories("1942/");
-		System.out.println(territories);
-		List<Country> countries = loadCountries("1942/");
-		System.out.println(countries);
+		String path = "1942/";
+		List<Country> countries = loadCountries(path);
+		Map<String, Territory> territories = loadTerritories(path);
 		loadTerritoryOwnership(territories, countries);
 	}
 

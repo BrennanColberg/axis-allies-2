@@ -1,4 +1,7 @@
+import java.io.PrintStream;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class Country {
@@ -40,6 +43,17 @@ public class Country {
 
 	public String toString() {
 		return name;
+	}
+	
+	public void save(PrintStream stream) {
+		List<String> territoryNames = new LinkedList<>();
+		for (Territory territory : territories) {
+			territoryNames.add(territory.getName());
+		}
+		territoryNames.sort(null);
+		for (String name : territoryNames) {
+			stream.println(name);
+		}
 	}
 
 }

@@ -1,17 +1,17 @@
-United Kingdom
-Eastern Canada
-Western Canada
-Gibraltar
-French West Africa
-French Equatorial Africa
-Belgian Congo
-Rhodesia
-Union of South Africa
-French Madagascar
-Italian East Africa
 Anglo-Egypt Sudan
-Trans-Jordan
-Persia
-India
 Australia
+Belgian Congo
+Eastern Canada
+French Equatorial Africa
+French Madagascar
+French West Africa
+Gibraltar
+India
+Italian East Africa
 New Zealand
+Persia
+Rhodesia
+Trans-Jordan
+Union of South Africa
+United Kingdom
+Western Canada
