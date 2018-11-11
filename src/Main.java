@@ -11,13 +11,15 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		String path = "1942/";
 		List<Country> countries = loadCountries(path);
+		Map<Alliance, List<Country>> alliances = loadAlliances(countries);
 		Map<String, Territory> territories = loadTerritories(path);
 		loadTerritoryOwnership(territories, countries);
 		loadBorders(path, territories);
 
-		for (Country country : countries) {
-			System.out.println(country.getSummary());
-			System.out.println(country.getConquerableTerritories());
+		for (Alliance alliance : alliances.keySet()) {
+			System.out.println(alliance + ":");
+			for (Country country : alliances.get(alliance))
+				System.out.println(country.getSummary());
 			System.out.println();
 		}
 
@@ -67,6 +69,17 @@ public class Main {
 		return countries;
 	}
 
+	private static Map<Alliance, List<Country>> loadAlliances(List<Country> countries) {
+		Map<Alliance, List<Country>> alliances = new HashMap<>();
+		for (Country country : countries) {
+			Alliance alliance = country.getAlliance();
+			if (!alliances.containsKey(alliance))
+				alliances.put(alliance, new LinkedList<>());
+			alliances.get(alliance).add(country);
+		}
+		return alliances;
+	}
+
 	@SuppressWarnings("resource")
 	private static void loadTerritoryOwnership(Map<String, Territory> territories, List<Country> countries)
 			throws FileNotFoundException {
@@ -84,7 +97,7 @@ public class Main {
 			country.collectIncome();
 		}
 		for (Territory territory : territories.values())
-			if (territory.getOwner() == null)
+			if (territory.getCountry() == null)
 				throw new IllegalStateException(territory.getName() + " is unowned!");
 	}
 

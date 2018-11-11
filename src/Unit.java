@@ -28,6 +28,10 @@ public class Unit {
 		this(model, country);
 		this.setTerritory(territory);
 	}
+	
+	public Unit(Unit model, Territory territory) {
+		this(model, territory.getCountry(), territory);
+	}
 
 	public String getName() {
 		return name;

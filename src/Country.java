@@ -62,14 +62,14 @@ public class Country {
 		Set<Territory> result = new HashSet<>();
 		for (Territory territory : territories)
 			for (Territory borderingTerritory : territory.getBorderingTerritories())
-				if (!this.alliedTo(borderingTerritory.getOwner()))
+				if (!this.alliedTo(borderingTerritory.getCountry()))
 					result.add(borderingTerritory);
 		return result;
 	}
 
 	public boolean isOccupied() {
 		for (Territory territory : territories)
-			if (territory.isCapital() && territory.getOriginalOwner() == this)
+			if (territory.isCapital() && territory.getOriginalCountry() == this)
 				return territory.isCaptured();
 		return false;
 	}

@@ -1,0 +1,51 @@
+Alaska 1 Infantry
+Algeria 1 Infantry 1 Artillery
+Anglo-Egypt Sudan 1 Infantry 1 Tank 1 Fighter
+Archangel 3 Infantry 1 Tank
+Australia 3 Infantry
+Balkans 2 Infantry 1 Tank 1 Fighter
+Belorussia 3 Infantry
+Borneo 1 Infantry
+Buryatia S.S.R. 2 Infantry
+Caroline Islands 1 Infantry
+Caucasus 3 Infantry 1 Artillery 1 Tank 1 AA Gun 1 Industrial Complex
+Central United States 2 Infantry
+China 2 Infantry 1 Fighter
+East Indies 2 Infantry
+Eastern Canada 1 Tank
+Eastern Europe 2 Infantry 1 Tank 1 Fighter
+Eastern United States 2 Infantry 1 Fighter 1 AA Gun 1 Industrial Complex
+Evenki National Okrug 2 Infantry
+French Indo-China 2 Infantry 1 Fighter
+Germany 3 Infantry 2 Tank 1 Fighter 1 Bomber 1 AA Gun 1 Industrial Complex
+Hawaii 2 Infantry 1 Fighter
+India 3 Infantry 1 AA Gun
+Italian East Africa
+Japan 4 Infantry 1 Artillery 1 Tank 1 Fighter 1 Bomber 1 AA Gun 1 Industrial Complex
+Karelia S.S.R. 3 Infantry 1 Fighter
+Kazakh S.S.R. 2 Infantry
+Kwangtung 3 Infantry
+Libya 1 Infantry 1 Tank
+Manchuria 2 Infantry 1 Fighter
+Midway 1 Infantry
+New Guinea 1 Infantry
+New Zealand 1 Infantry
+Norway 3 Infantry 1 Fighter
+Novosibirsk 2 Infantry
+Okinawa 1 Infantry
+Persia 1 Infantry
+Philippine Islands 2 Infantry
+Russia 3 Infantry 1 Artillery 2 Tanks 1 Fighter 1 AA Gun 1 Industrial Complex
+Sinkiang 2 Infantry
+Solomon Islands 1 Infantry
+Southern Europe 2 Infantry 1 Artillery 1 Tank 1 AA Gun 1 Industrial Complex
+Soviet Far East 2 Infantry
+Trans-Jordan 1 Infantry
+Ukraine S.S.R. 3 Infantry 1 Artillery 1 Tank 1 Fighter
+Union of South Africa 1 Infantry
+United Kingdom 2 Infantry 1 Artillery 1 Tank 2 Fighters 1 Bomber 1 AA Gun 1 Industrial Complex
+Wake Island 1 Infantry
+West Russia 3 Infantry 1 Artillery 1 Tank
+Western Canada 1 Infantry
+Western Europe 2 Infantry 2 Tank 1 Fighter 1 AA Gun
+Western United States 2 Infantry 1 Fighter 1 AA Gun 1 Industrial Complex

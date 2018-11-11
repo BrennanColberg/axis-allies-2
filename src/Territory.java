@@ -9,8 +9,8 @@ public class Territory {
 	private Type type;
 	private String cityName;
 	// optional
-	private Country owner;
-	private Country originalOwner;
+	private Country country;
+	private Country originalCountry;
 	private Set<Territory> borderingTerritories;
 	private Set<Unit> units;
 
@@ -57,26 +57,26 @@ public class Territory {
 		return type == Type.Capital;
 	}
 
-	public Country getOwner() {
-		return owner;
+	public Country getCountry() {
+		return country;
 	}
 
-	public Country getOriginalOwner() {
-		return originalOwner;
+	public Country getOriginalCountry() {
+		return originalCountry;
 	}
 
 	public boolean isCaptured() {
-		if (originalOwner == null)
+		if (originalCountry == null)
 			throw new IllegalStateException(this + " has never been owned!");
-		return owner != originalOwner;
+		return country != originalCountry;
 	}
 
 	public void setOwner(Country owner) {
-		if (this.owner != null) {
-			this.owner.removeTerritory(this);
-			this.owner = owner;
+		if (this.country != null) {
+			this.country.removeTerritory(this);
+			this.country = owner;
 		} else {
-			this.originalOwner = this.owner = owner;
+			this.originalCountry = this.country = owner;
 		}
 	}
 
