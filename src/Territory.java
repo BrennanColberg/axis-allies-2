@@ -40,6 +40,22 @@ public class Territory {
 		return type != Type.Neutral ? value : -1;
 	}
 
+	public int getValueOfUnits() {
+		int totalUnitValue = 0;
+		for (Unit unit : units)
+			if (!unit.getName().equals("Industrial Complex") && !unit.getName().equals("AA Gun"))
+				totalUnitValue += unit.getCost();
+		return totalUnitValue;
+	}
+
+	public int getDefenseStrength() {
+		int totalStrength = 0;
+		for (Unit unit : units)
+			if (!unit.getName().equals("Industrial Complex"))
+				totalStrength += unit.getDefense() + 2;
+		return totalStrength;
+	}
+
 	public String getCityName() {
 		return cityName;
 	}
@@ -55,7 +71,7 @@ public class Territory {
 	public boolean isCapital() {
 		return type == Type.Capital;
 	}
-	
+
 	public boolean isOwnable() {
 		return type == Type.Normal || type == Type.VictoryCity || type == Type.Capital;
 	}

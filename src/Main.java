@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
 
 public class Main {
@@ -40,6 +41,23 @@ public class Main {
 					(double) value / country.getIncome());
 			System.out.println();
 		}
+
+		// soft underbelly quotient
+		Map<Territory, Double> hardness = new HashMap<>();
+		for (Territory territory : territories.values())
+			if (territory.getValue() != 0)
+				for (Territory border : territory.getBorderingTerritories())
+					if (territory.getCountry() != null && border.getCountry() != null
+							&& !territory.getCountry().alliedTo(border.getCountry())) {
+						int value = territory.getValue();
+						int unitValue = territory.getValueOfUnits();
+						double strength = territory.getDefenseStrength();
+						hardness.put(territory, (double) strength);
+					}
+		List<Entry<Territory, Double>> order = new LinkedList<>(hardness.entrySet());
+		order.sort(Entry.comparingByValue());
+		for (Entry<Territory, Double> entry : order)
+			System.out.printf("%.0f | %s\n", entry.getValue(), entry.getKey());
 
 	}
 

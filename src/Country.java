@@ -34,7 +34,7 @@ public class Country {
 	}
 
 	public boolean alliedTo(Country other) {
-		return this.alliance == other.alliance;
+		return other.alliance == null ? true : this.alliance == other.alliance;
 	}
 
 	public String getPath() {
