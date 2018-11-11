@@ -26,7 +26,7 @@ Germany 10 true Berlin
 Gibraltar 0
 Greenland 0
 Hawaii 1
-India 3 Calcutta
+India 3 false Calcutta
 Italian East Africa 1
 Japan 8 true Tokyo
 Karelia S.S.R. 2 false Leningrad
@@ -40,7 +40,7 @@ New Guinea 1
 New Zealand 1
 Norway 3
 Novosibirsk 2
-Okinawa 0
+Okinawa 1
 Panama 1
 Persia 1
 Philippine Islands 3 false Manila

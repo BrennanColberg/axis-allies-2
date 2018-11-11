@@ -13,6 +13,14 @@ public class Main {
 		List<Country> countries = loadCountries(path);
 		Map<String, Territory> territories = loadTerritories(path);
 		loadTerritoryOwnership(territories, countries);
+		
+		for (Country country : countries) {
+			System.out.printf("%s has %d victory points, %d IPCs in the bank, and an income of %d.\n",
+					country.getName(),
+					country.getVictoryPoints(),
+					country.getBalance(),
+					country.getIncome());
+		}
 	}
 
 	@SuppressWarnings("resource")
@@ -72,7 +80,12 @@ public class Main {
 					throw new IllegalArgumentException("\"" + name + "\" is not a valid territory!");
 				}
 			}
+			// starting income
+			country.collectIncome();
 		}
+		for (Territory territory : territories.values())
+			if (territory.getOwner() == null)
+				throw new IllegalStateException(territory.getName() + " is unowned!");
 	}
 
 }

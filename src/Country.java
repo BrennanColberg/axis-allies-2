@@ -9,6 +9,7 @@ public class Country {
 	private String name;
 	private Set<Territory> territories;
 	private String path;
+	private int balance;
 
 	public Country(String name, String path) {
 		this.name = name;
@@ -41,10 +42,44 @@ public class Country {
 		territories.remove(territory);
 	}
 
+	public int getBalance() {
+		return balance;
+	}
+
+	public int getIncome() {
+		if (!isOccupied()) {
+			int income = 0;
+			for (Territory territory : territories)
+				income += territory.getValue();
+			return income;
+		} else {
+			return 0;
+		}
+	}
+	
+	public void collectIncome() {
+		balance += getIncome();
+	}
+	
+	public int getVictoryPoints() {
+		int points = 0;
+		for (Territory territory : territories)
+			if (territory.isVictoryCity())
+				points++;
+		return points;
+	}
+	
+	public boolean isOccupied() {
+		for (Territory territory : territories)
+			if (territory.isCapital() && territory.getOriginalOwner() == this)
+				return territory.isCaptured();
+		throw new IllegalStateException(this + " does not have a capital!");
+	}
+
 	public String toString() {
 		return name;
 	}
-	
+
 	public void save(PrintStream stream) {
 		List<String> territoryNames = new LinkedList<>();
 		for (Territory territory : territories) {

@@ -8,6 +8,7 @@ public class Territory {
 	private String cityName;
 	// optional
 	private Country owner;
+	private Country originalOwner;
 
 	public Territory(String name, int value) {
 		this.name = name;
@@ -49,11 +50,24 @@ public class Territory {
 	public Country getOwner() {
 		return owner;
 	}
+	
+	public Country getOriginalOwner() {
+		return originalOwner;
+	}
+	
+	public boolean isCaptured() {
+		if (originalOwner == null)
+			throw new IllegalStateException(this + " has never been owned!");
+		return owner != originalOwner;
+	}
 
 	public void setOwner(Country owner) {
-		if (this.owner != null)
+		if (this.owner != null) {
 			this.owner.removeTerritory(this);
-		this.owner = owner;
+			this.owner = owner;
+		} else {
+			this.originalOwner = this.owner = owner;
+		}
 	}
 
 	public String toString() {
