@@ -104,7 +104,7 @@ public class Country {
 	}
 
 	public String getSummary() {
-		String result = getName() + " has " + getVictoryPoints();
+		String result = getName() + " has " + getVictoryPoints() + " victory points";
 		if (!isOccupied()) {
 			result += ", " + getBalance() + " IPCs in the bank, and an income of " + getIncome() + ".";
 		} else {
@@ -125,25 +125,15 @@ public class Country {
 }
 
 enum Alliance {
-	Allies("Allies"), Axis("Axis");
-
-	private String name;
-
-	private Alliance(String name) {
-		this.name = name;
-	}
-
-	public String toString() {
-		return name;
-	}
-
+	
+	Allies(), Axis();
+	
 	static Alliance fromString(String str) {
 		str = str.toLowerCase();
-		if (str.equals("allies"))
-			return Allies;
-		else if (str.equals("axis"))
-			return Axis;
-		else
-			return null;
+		for (Alliance alliance : Alliance.values())
+			if (str.equals(alliance.toString().toLowerCase()))
+				return alliance;
+		return null;
 	}
+	
 }
