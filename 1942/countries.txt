@@ -1,5 +1,5 @@
-USSR russia.txt
-NSDAP germany.txt
-GBR britain.txt
-JAPAN japan.txt
-USA usa.txt
+USSR allies russia.txt
+NSDAP axis germany.txt
+GBR allies britain.txt
+JAPAN axis japan.txt
+USA allies usa.txt

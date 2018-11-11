@@ -12,7 +12,7 @@ public class Territory {
 	private Country owner;
 	private Country originalOwner;
 	private Set<Territory> borderingTerritories;
-	
+
 	private Territory() {
 		this.borderingTerritories = new HashSet<>();
 	}
@@ -78,22 +78,32 @@ public class Territory {
 			this.originalOwner = this.owner = owner;
 		}
 	}
-	
+
 	public Set<Territory> getBorderingTerritories() {
 		return borderingTerritories;
 	}
-	
+
 	public void addBorderingTerritory(Territory other) {
 		this.borderingTerritories.add(other);
 		other.borderingTerritories.add(this);
 	}
-	
+
 	public boolean isBordering(Territory other) {
 		return borderingTerritories.contains(other);
 	}
 
 	public String toString() {
-		return this.isNeutral() ? name : name + " (" + value + ")";
+		switch (this.type) {
+		case Neutral:
+			return name;
+		case Normal:
+			return name + " (" + value + ")";
+		case VictoryCity:
+			return name + " [" + value + "]";
+		case Capital:
+			return name + " <" + value + ">";
+		}
+		return null;
 	}
 
 }

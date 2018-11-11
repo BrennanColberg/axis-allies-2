@@ -8,17 +8,31 @@ public class Country {
 
 	private String name;
 	private Set<Territory> territories;
+	private Alliance alliance;
 	private String path;
 	private int balance;
 
-	public Country(String name, String path) {
+	public Country(String name, String alliance, String path) {
+		this(name, Alliance.fromString(alliance), path);
+	}
+
+	public Country(String name, Alliance alliance, String path) {
 		this.name = name;
+		this.alliance = alliance;
 		this.path = path;
 		this.territories = new HashSet<>();
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public Alliance getAlliance() {
+		return alliance;
+	}
+
+	public boolean alliedTo(Country other) {
+		return this.alliance == other.alliance;
 	}
 
 	public String getPath() {
@@ -40,6 +54,15 @@ public class Country {
 		if (!territories.contains(territory))
 			throw new IllegalStateException(this + " does not contain " + territory);
 		territories.remove(territory);
+	}
+
+	public Set<Territory> getConquerableTerritories() {
+		Set<Territory> result = new HashSet<>();
+		for (Territory territory : territories)
+			for (Territory borderingTerritory : territory.getBorderingTerritories())
+				if (!this.alliedTo(borderingTerritory.getOwner()))
+					result.add(borderingTerritory);
+		return result;
 	}
 
 	public int getBalance() {
@@ -99,4 +122,28 @@ public class Country {
 			stream.println(name);
 	}
 
+}
+
+enum Alliance {
+	Allies("Allies"), Axis("Axis");
+
+	private String name;
+
+	private Alliance(String name) {
+		this.name = name;
+	}
+
+	public String toString() {
+		return name;
+	}
+
+	static Alliance fromString(String str) {
+		str = str.toLowerCase();
+		if (str.equals("allies"))
+			return Allies;
+		else if (str.equals("axis"))
+			return Axis;
+		else
+			return null;
+	}
 }

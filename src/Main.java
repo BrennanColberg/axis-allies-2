@@ -1,6 +1,5 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,9 +15,11 @@ public class Main {
 		loadTerritoryOwnership(territories, countries);
 		loadBorders(path, territories);
 
-		for (Country country : countries)
+		for (Country country : countries) {
 			System.out.println(country.getSummary());
-		
+			System.out.println(country.getConquerableTerritories());
+		}
+
 	}
 
 	@SuppressWarnings("resource")
@@ -59,7 +60,7 @@ public class Main {
 		List<Country> countries = new LinkedList<>();
 		while (file.hasNextLine()) {
 			Scanner line = new Scanner(file.nextLine());
-			Country country = new Country(line.next(), path + line.next());
+			Country country = new Country(line.next(), line.next(), path + line.next());
 			countries.add(country);
 		}
 		return countries;
