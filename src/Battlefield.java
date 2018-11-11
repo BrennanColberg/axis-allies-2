@@ -34,7 +34,7 @@ public class Battlefield {
 		Set<Unit> defense = new HashSet<>(territory.getUnits(territory.getAlliance()));
 		Alliance winner = conductCombat(offense, defense, log);
 		if (log)
-			System.out.println(territory.getCountry() + " won!");
+			System.out.println(winner + " won!");
 		return winner;
 	}
 

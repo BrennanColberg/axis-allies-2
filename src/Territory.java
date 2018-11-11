@@ -137,11 +137,16 @@ public class Territory {
 		for (Unit unit : units)
 			this.units.add(unit);
 	}
-
+	
 	public void removeUnit(Unit unit) {
 		units.remove(unit);
 	}
 
+	public void removeUnits(Collection<Unit> units) {
+		for (Unit unit : units)
+			this.units.remove(unit);
+	}
+	
 	public String toString() {
 		switch (type) {
 		case Neutral:

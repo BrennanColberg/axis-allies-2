@@ -9,6 +9,7 @@ public class Unit {
 	private int moves;
 	private int cost;
 	private Country country;
+	private Alliance alliance;
 	private Territory territory;
 
 	public Unit(String name, int offense, int defense, int travel, int cost) {
@@ -18,9 +19,14 @@ public class Unit {
 		this.moves = this.travel = travel;
 		this.cost = cost;
 	}
+	
+	public Unit(Unit model, Alliance alliance) {
+		this(model.name, model.offense, model.defense, model.travel, model.cost);
+		this.alliance = alliance;
+	}
 
 	public Unit(Unit model, Country country) {
-		this(model.name, model.offense, model.defense, model.travel, model.cost);
+		this(model, country.getAlliance());
 		this.country = country;
 	}
 
@@ -74,7 +80,7 @@ public class Unit {
 	}
 
 	public Alliance getAlliance() {
-		return country.getAlliance();
+		return alliance;
 	}
 
 	public Color getColor() {
@@ -100,8 +106,10 @@ public class Unit {
 	}
 	
 	public String toString() {
-		if (this.getCountry() == null) {
+		if (this.getAlliance() == null) {
 			return name + " (" + cost + " IPCs)";
+		} else if (this.getCountry() == null) {
+			return name + " (" + alliance + ")";
 		} else {
 			return name + " (" + country + ")";
 		}
