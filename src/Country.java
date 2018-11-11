@@ -20,7 +20,7 @@ public class Country {
 	public String getPath() {
 		return path;
 	}
-	
+
 	public Set<Territory> getTerritories() {
 		return territories;
 	}
