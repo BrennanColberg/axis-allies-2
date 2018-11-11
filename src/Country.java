@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.io.PrintStream;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -11,6 +12,7 @@ public class Country {
 	private Alliance alliance;
 	private String path;
 	private int balance;
+	private Color color;
 
 	public Country(String name, String alliance, String path) {
 		this(name, Alliance.fromString(alliance), path);
@@ -65,6 +67,21 @@ public class Country {
 		return result;
 	}
 
+	public boolean isOccupied() {
+		for (Territory territory : territories)
+			if (territory.isCapital() && territory.getOriginalOwner() == this)
+				return territory.isCaptured();
+		return false;
+	}
+
+	public int getVictoryPoints() {
+		int points = 0;
+		for (Territory territory : territories)
+			if (territory.isVictoryCity())
+				points++;
+		return points;
+	}
+
 	public int getBalance() {
 		return balance;
 	}
@@ -84,19 +101,8 @@ public class Country {
 		balance += getIncome();
 	}
 
-	public int getVictoryPoints() {
-		int points = 0;
-		for (Territory territory : territories)
-			if (territory.isVictoryCity())
-				points++;
-		return points;
-	}
-
-	public boolean isOccupied() {
-		for (Territory territory : territories)
-			if (territory.isCapital() && territory.getOriginalOwner() == this)
-				return territory.isCaptured();
-		return false;
+	public Color getColor() {
+		return color;
 	}
 
 	public String toString() {
@@ -125,9 +131,9 @@ public class Country {
 }
 
 enum Alliance {
-	
+
 	Allies(), Axis();
-	
+
 	static Alliance fromString(String str) {
 		str = str.toLowerCase();
 		for (Alliance alliance : Alliance.values())
@@ -135,5 +141,5 @@ enum Alliance {
 				return alliance;
 		return null;
 	}
-	
+
 }

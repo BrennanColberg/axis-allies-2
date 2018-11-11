@@ -12,6 +12,7 @@ public class Territory {
 	private Country owner;
 	private Country originalOwner;
 	private Set<Territory> borderingTerritories;
+	private Set<Unit> units;
 
 	private Territory() {
 		this.borderingTerritories = new HashSet<>();
@@ -90,6 +91,26 @@ public class Territory {
 
 	public boolean isBordering(Territory other) {
 		return borderingTerritories.contains(other);
+	}
+
+	public Set<Unit> getUnits() {
+		return units;
+	}
+
+	public Set<Unit> getUnits(Alliance alliance) {
+		Set<Unit> result = new HashSet<>();
+		for (Unit unit : units)
+			if (unit.getAlliance() == alliance)
+				result.add(unit);
+		return result;
+	}
+
+	public void addUnit(Unit unit) {
+		units.add(unit);
+	}
+
+	public void removeUnit(Unit unit) {
+		units.remove(unit);
 	}
 
 	public String toString() {
