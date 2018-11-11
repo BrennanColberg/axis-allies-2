@@ -1,0 +1,5 @@
+USSR russia.txt
+NSDAP germany.txt
+GBR britain.txt
+JAPAN japan.txt
+USA usa.txt

@@ -5,9 +5,11 @@ public class Country {
 
 	private String name;
 	private Set<Territory> territories;
+	private String path;
 
-	public Country(String name) {
+	public Country(String name, String path) {
 		this.name = name;
+		this.path = path;
 		this.territories = new HashSet<>();
 	}
 
@@ -15,6 +17,10 @@ public class Country {
 		return name;
 	}
 
+	public String getPath() {
+		return path;
+	}
+	
 	public Set<Territory> getTerritories() {
 		return territories;
 	}
