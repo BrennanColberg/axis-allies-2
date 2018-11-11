@@ -14,23 +14,21 @@ public class Territory {
 	private Set<Territory> borderingTerritories;
 	private Set<Unit> units;
 
-	private Territory() {
+	public Territory(String name, Type type) {
+		this.name = name;
+		this.type = type;
 		this.borderingTerritories = new HashSet<>();
 		this.units = new HashSet<>();
 	}
 
 	public Territory(String name, int value) {
-		this();
-		this.name = name;
+		this(name, Type.Normal);
 		this.value = value;
-		this.type = Type.Normal;
 	}
 
 	public Territory(String name, int value, boolean capital, String cityName) {
-		this();
-		this.name = name;
+		this(name, capital ? Type.Capital : Type.VictoryCity);
 		this.value = value;
-		this.type = capital ? Type.Capital : Type.VictoryCity;
 		this.cityName = cityName;
 	}
 
@@ -56,6 +54,10 @@ public class Territory {
 
 	public boolean isCapital() {
 		return type == Type.Capital;
+	}
+	
+	public boolean isOwnable() {
+		return type == Type.Normal || type == Type.VictoryCity || type == Type.Capital;
 	}
 
 	public Country getCountry() {
@@ -115,7 +117,7 @@ public class Territory {
 	}
 
 	public String toString() {
-		switch (this.type) {
+		switch (type) {
 		case Neutral:
 			return name;
 		case Normal:
@@ -124,6 +126,8 @@ public class Territory {
 			return name + " [" + value + "]";
 		case Capital:
 			return name + " <" + value + ">";
+		case SeaZone:
+			return "Sea Zone " + name;
 		}
 		return null;
 	}
@@ -131,5 +135,5 @@ public class Territory {
 }
 
 enum Type {
-	Neutral(), Normal(), VictoryCity(), Capital();
+	SeaZone(), Neutral(), Normal(), VictoryCity(), Capital();
 }

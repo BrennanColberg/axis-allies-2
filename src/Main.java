@@ -21,12 +21,24 @@ public class Main {
 		Map<String, Unit> units = loadUnits(path);
 		loadStartingUnits(path, units, territories);
 
-		for (Alliance alliance : alliances.keySet()) {
+		// country analysis
+		for (Country country : countries) {
+			Map<String, Integer> unitCount = new HashMap<>();
+			int value = 0;
+			for (String name : units.keySet())
+				unitCount.put(name, 0);
+			for (Territory territory : country.getTerritories())
+				for (Unit unit : territory.getUnits()) {
+					unitCount.put(unit.getName(), unitCount.get(unit.getName()) + 1);
+					value += unit.getCost();
+				}
+			for (String name : unitCount.keySet())
+				if (unitCount.get(name) > 0)
+					System.out.println(country.getName() + " has " + unitCount.get(name) + " of " + name);
+			System.out.println(country.getName() + " has " + value + " IPCs worth of units.");
+			System.out.printf("%s starts with %.1f turns' worth of units.\n", country.getName(),
+					(double) value / country.getIncome());
 			System.out.println();
-			System.out.println(alliance + ":");
-			for (Country country : alliances.get(alliance))
-				System.out.println(country.getSummary());
-			
 		}
 
 	}
@@ -42,21 +54,27 @@ public class Main {
 			String name = line.next();
 			while (line.hasNext() && !line.hasNextInt())
 				name += " " + line.next();
-			// get value
-			int value = line.nextInt();
-			// see if it's a victory city
-			if (line.hasNextBoolean()) {
-				// see if it's a capital city
-				boolean capital = line.nextBoolean();
-				// get city name
-				String cityName = line.next();
-				while (line.hasNext())
-					cityName += " " + line.next();
-				// initialize
-				territory = new Territory(name, value, capital, cityName);
+			// if it's a valid territory
+			if (line.hasNextInt()) {
+				// get value
+				int value = line.nextInt();
+				// see if it's a victory city
+				if (line.hasNextBoolean()) {
+					// see if it's a capital city
+					boolean capital = line.nextBoolean();
+					// get city name
+					String cityName = line.next();
+					while (line.hasNext())
+						cityName += " " + line.next();
+					// initialize
+					territory = new Territory(name, value, capital, cityName);
+				} else {
+					// initialize
+					territory = new Territory(name, value);
+				}
+				// if it's a sea zone
 			} else {
-				// initialize
-				territory = new Territory(name, value);
+				territory = new Territory(name, Type.SeaZone);
 			}
 			territories.put(territory.getName(), territory);
 		}
@@ -122,7 +140,7 @@ public class Main {
 			country.collectIncome();
 		}
 		for (Territory territory : territories.values())
-			if (territory.getCountry() == null)
+			if (territory.getCountry() == null && territory.isOwnable())
 				throw new IllegalStateException(territory.getName() + " is unowned!");
 	}
 
@@ -148,6 +166,8 @@ public class Main {
 			while (line.hasNext() && !line.hasNextInt())
 				territoryName += " " + line.next();
 			Territory territory = territories.get(territoryName);
+			if (territory.getCountry() == null)
+				throw new IllegalArgumentException(territory + " has no country!");
 			while (line.hasNextInt()) {
 				int quantity = line.nextInt();
 				String unitName = line.next();
@@ -156,10 +176,8 @@ public class Main {
 				if (!units.containsKey(unitName))
 					throw new IllegalArgumentException("\"" + unitName + "\" is not a valid unit!");
 				Unit prototype = units.get(unitName);
-				for (int i = 0; i < quantity; i++) {
-					Unit unit = new Unit(prototype, territory);
-					System.out.println("Added " + unit + " to " + territory);
-				}
+				for (int i = 0; i < quantity; i++)
+					new Unit(prototype, territory);
 			}
 		}
 	}
