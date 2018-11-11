@@ -8,3 +8,5 @@ Transport 0 1 2 8
 Destroyer 3 3 2 12
 Aircraft Carrier 1 3 2 16
 Battleship 4 4 2 24
+AA Gun 0 0 1 6
+Industrial Complex 0 0 0 15

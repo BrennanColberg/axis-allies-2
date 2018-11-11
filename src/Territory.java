@@ -16,6 +16,7 @@ public class Territory {
 
 	private Territory() {
 		this.borderingTerritories = new HashSet<>();
+		this.units = new HashSet<>();
 	}
 
 	public Territory(String name, int value) {

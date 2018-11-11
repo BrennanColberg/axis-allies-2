@@ -10,17 +10,23 @@ public class Main {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		String path = "1942/";
+		// load in territories
+		Map<String, Territory> territories = loadTerritories(path);
+		loadBorders(path, territories);
+		// load in countries
 		List<Country> countries = loadCountries(path);
 		Map<Alliance, List<Country>> alliances = loadAlliances(countries);
-		Map<String, Territory> territories = loadTerritories(path);
 		loadTerritoryOwnership(territories, countries);
-		loadBorders(path, territories);
+		// load in units
+		Map<String, Unit> units = loadUnits(path);
+		loadStartingUnits(path, units, territories);
 
 		for (Alliance alliance : alliances.keySet()) {
+			System.out.println();
 			System.out.println(alliance + ":");
 			for (Country country : alliances.get(alliance))
 				System.out.println(country.getSummary());
-			System.out.println();
+			
 		}
 
 	}
@@ -81,6 +87,25 @@ public class Main {
 	}
 
 	@SuppressWarnings("resource")
+	private static Map<String, Unit> loadUnits(String path) throws FileNotFoundException {
+		Scanner file = new Scanner(new File(path + "units.txt"));
+		Map<String, Unit> units = new HashMap<>();
+		while (file.hasNextLine()) {
+			Scanner line = new Scanner(file.nextLine());
+			String name = line.next();
+			while (line.hasNext() && !line.hasNextInt())
+				name += " " + line.next();
+			int offense = line.nextInt();
+			int defense = line.nextInt();
+			int travel = line.nextInt();
+			int cost = line.nextInt();
+			Unit unit = new Unit(name, offense, defense, travel, cost);
+			units.put(unit.getName(), unit);
+		}
+		return units;
+	}
+
+	@SuppressWarnings("resource")
 	private static void loadTerritoryOwnership(Map<String, Territory> territories, List<Country> countries)
 			throws FileNotFoundException {
 		for (Country country : countries) {
@@ -110,6 +135,32 @@ public class Main {
 			names[1] = names[1].trim();
 			if (territories.containsKey(names[0]) && territories.containsKey(names[1]))
 				territories.get(names[0]).addBorderingTerritory(territories.get(names[1]));
+		}
+	}
+
+	@SuppressWarnings("resource")
+	private static void loadStartingUnits(String path, Map<String, Unit> units, Map<String, Territory> territories)
+			throws FileNotFoundException {
+		Scanner file = new Scanner(new File(path + "starting-units.txt"));
+		while (file.hasNextLine()) {
+			Scanner line = new Scanner(file.nextLine());
+			String territoryName = line.next();
+			while (line.hasNext() && !line.hasNextInt())
+				territoryName += " " + line.next();
+			Territory territory = territories.get(territoryName);
+			while (line.hasNextInt()) {
+				int quantity = line.nextInt();
+				String unitName = line.next();
+				while (line.hasNext() && !line.hasNextInt())
+					unitName += " " + line.next();
+				if (!units.containsKey(unitName))
+					throw new IllegalArgumentException("\"" + unitName + "\" is not a valid unit!");
+				Unit prototype = units.get(unitName);
+				for (int i = 0; i < quantity; i++) {
+					Unit unit = new Unit(prototype, territory);
+					System.out.println("Added " + unit + " to " + territory);
+				}
+			}
 		}
 	}
 

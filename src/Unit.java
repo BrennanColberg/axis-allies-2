@@ -86,7 +86,8 @@ public class Unit {
 	}
 
 	private void setTerritory(Territory territory) {
-		this.territory.removeUnit(this);
+		if (this.territory != null)
+			this.territory.removeUnit(this);
 		this.territory = territory;
 		this.territory.addUnit(this);
 	}
@@ -96,6 +97,14 @@ public class Unit {
 		// checks if it can move that far
 		// moves to territory
 		this.setTerritory(territory);
+	}
+	
+	public String toString() {
+		if (this.getCountry() == null) {
+			return name + " (" + cost + " IPCs)";
+		} else {
+			return name + " (" + country + ")";
+		}
 	}
 
 }

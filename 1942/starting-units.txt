@@ -35,7 +35,7 @@ Novosibirsk 2 Infantry
 Okinawa 1 Infantry
 Persia 1 Infantry
 Philippine Islands 2 Infantry
-Russia 3 Infantry 1 Artillery 2 Tanks 1 Fighter 1 AA Gun 1 Industrial Complex
+Russia 3 Infantry 1 Artillery 2 Tank 1 Fighter 1 AA Gun 1 Industrial Complex
 Sinkiang 2 Infantry
 Solomon Islands 1 Infantry
 Southern Europe 2 Infantry 1 Artillery 1 Tank 1 AA Gun 1 Industrial Complex
@@ -43,7 +43,7 @@ Soviet Far East 2 Infantry
 Trans-Jordan 1 Infantry
 Ukraine S.S.R. 3 Infantry 1 Artillery 1 Tank 1 Fighter
 Union of South Africa 1 Infantry
-United Kingdom 2 Infantry 1 Artillery 1 Tank 2 Fighters 1 Bomber 1 AA Gun 1 Industrial Complex
+United Kingdom 2 Infantry 1 Artillery 1 Tank 2 Fighter 1 Bomber 1 AA Gun 1 Industrial Complex
 Wake Island 1 Infantry
 West Russia 3 Infantry 1 Artillery 1 Tank
 Western Canada 1 Infantry
