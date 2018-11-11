@@ -80,6 +80,16 @@ public class Country {
 		return name;
 	}
 
+	public String getSummary() {
+		String result = getName() + " has " + getVictoryPoints();
+		if (!isOccupied()) {
+			result += ", " + getBalance() + " IPCs in the bank, and an income of " + getIncome() + ".\n";
+		} else {
+			result += " and is occupied.";
+		}
+		return result;
+	}
+
 	public void save(PrintStream stream) {
 		List<String> territoryNames = new LinkedList<>();
 		for (Territory territory : territories)
