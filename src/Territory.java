@@ -14,12 +14,16 @@ public class Territory {
 	private Country originalCountry;
 	private Set<Territory> borderingTerritories;
 	private Set<Unit> units;
-
-	public Territory(String name, Type type) {
-		this.name = name;
-		this.type = type;
+	
+	public Territory() {
 		this.borderingTerritories = new HashSet<>();
 		this.units = new HashSet<>();
+	}
+
+	public Territory(String name, Type type) {
+		this();
+		this.name = name;
+		this.type = type;
 	}
 
 	public Territory(String name, int value) {

@@ -45,7 +45,7 @@ public class Battlefield {
 	 * @param defense set of units, all on the other alliance
 	 * @return the alliance that wins
 	 */
-	private static Alliance conductCombat(Set<Unit> offense, Set<Unit> defense, boolean log) {
+	public static Alliance conductCombat(Set<Unit> offense, Set<Unit> defense, boolean log) {
 
 		// figure out & check alliances (beforehand in case of annihilation)
 		Alliance offenseAlliance = getSideAlliance(offense);

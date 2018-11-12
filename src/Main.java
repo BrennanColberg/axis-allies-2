@@ -1,63 +1,67 @@
 import java.io.FileNotFoundException;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.Set;
 
+@SuppressWarnings("resource")
 public class Main {
 
 	private static Data data;
 
 	public static void main(String[] args) throws FileNotFoundException {
 		data = new Data("1942/");
-
-		System.out.println(calculateInfantryQuotient(data.territories.get("Borneo")));
-		System.out.println(calculateInfantryQuotient(data.territories.get("Germany")));
-		System.out.println(calculateInfantryQuotient(data.territories.get("Anglo-Egypt Sudan")));
-
-	}
-
-	/**
-	 * Calculates the approximate number of infantry needed to conquer 50% of the
-	 * time (decimal value).
-	 * 
-	 * @param territory territory to test defenses of
-	 * @return the calculated infantry quotient
-	 */
-	private static double calculateInfantryQuotient(Territory territory) {
-		int infantry = 1;
-		double lastPercentage = 0;
-		double percentage = 0;
-		while ((percentage = calculateWinPercentage(territory, infantry)) < 0.5) {
-			lastPercentage = percentage;
-			infantry++;
+		Scanner console = new Scanner(System.in);
+		while (true) {
+			printInfantryQuotientOfArmy(console);
+			System.out.println();
 		}
-		double difference = percentage - lastPercentage;
-		double offset = 0.5 - lastPercentage;
-		return infantry - 1 + offset / difference;
 	}
 
-	private static double calculateWinPercentage(Territory territory, int infantry) {
+	public void printInfantryQuotientOfTerritory(String territoryName) {
+		Territory territory = data.territories.get(territoryName);
+		double quotient = data.calculateInfantryQuotient(territory);
+		System.out.println("IQ: " + quotient);
+	}
 
-		// set up infantry to attack
-		Set<Unit> offense = new HashSet<>();
-		for (int i = 0; i < infantry; i++)
-			offense.add(new Unit(data.units.get("Infantry"), territory.getAlliance().other()));
-		territory.addUnits(offense);
+	public static void printInfantryQuotientOfArmy(Scanner console) {
+		Set<Unit> defense = queryForUnits(console, Alliance.Allies, "Defense");
+		Territory territory = new Territory();
+		territory.addUnits(defense);
+		territory.setCountry(data.countries.get(0));
+		double quotient = data.calculateInfantryQuotient(territory);
+		System.out.println("IQ: " + quotient);
+	}
 
-		// calculate 1000 wins
-		int offenseWins = 0;
-		int runs = 1000;
-		for (int i = 0; i < runs; i++) {
-			Alliance winner = Battlefield.testCombat(territory, false);
-			if (winner == territory.getAlliance().other()) {
-				offenseWins++;
+	public static void conductConsoleCombat(Scanner console) {
+		Set<Unit> offense = queryForUnits(console, Alliance.Allies, "Offense");
+		Set<Unit> defense = queryForUnits(console, Alliance.Axis, "Defense");
+		Alliance winner = Battlefield.conductCombat(offense, defense, true);
+		System.out.println((winner == Alliance.Allies ? "Offense" : "Defense") + " wins!");
+	}
+
+	private static Set<Unit> queryForUnits(Scanner console, Alliance alliance, String side) {
+		boolean running = true;
+		Set<Unit> units = new HashSet<>();
+		while (running) {
+			System.out.print("Input [" + side + "]: ");
+			String rawInput = console.nextLine();
+			if (rawInput.trim().length() > 0) {
+				Scanner input = new Scanner(rawInput);
+				try {
+					int count = input.nextInt();
+					String unitName = input.next();
+					while (input.hasNext())
+						unitName += " " + input.next();
+					for (int i = 0; i < count; i++)
+						units.add(new Unit(data.units.get(unitName.trim()), alliance));
+				} catch (Exception e) {
+					System.out.println("stop being bad, you caused a " + e.getClass().getName());
+				}
+			} else {
+				running = false;
 			}
 		}
-
-		// retreat
-		territory.removeUnits(offense);
-
-		return (double) offenseWins / runs;
-
+		return units;
 	}
 
 }
