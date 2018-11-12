@@ -11,9 +11,29 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		data = new Data("1942/");
 		Scanner console = new Scanner(System.in);
+		int index = 0;
 		while (true) {
-			printInfantryQuotientOfArmy(console);
-			System.out.println();
+			Country current = data.countries.get(index);
+
+			// purchase units
+			
+			
+			// combat move
+			
+			
+			// conduct combat
+			
+			
+			// noncombat move
+			
+			
+			// placing units
+			
+			
+			// next country
+			index++;
+			if (index == 6)
+				index = 0;
 		}
 	}
 
